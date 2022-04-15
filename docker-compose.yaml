@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  redis:
+    image: redis
+    command: redis-server
+    ports:
+      - "6379:6379"
+    networks:
+      - kalahaGameRedis
+
+  kalahaGame:
+    image: lucasnscr/kalahagame:1.0
+    ports:
+      - "8081:8081"
+    environment:
+      REDIS_URL: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: kalahaGame
+      REDIS_TIMEOUT: 2000
+      REDIS_TTL: 6000000
+      REDIS_REPOSITORY: true
+    networks:
+      - kalahaGameRedis
+networks:
+  kalahaGameRedis:
+    driver: bridge
