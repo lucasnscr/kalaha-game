@@ -1,17 +1,14 @@
 package com.lucasnscr.kalahaGame.model;
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.redis.core.RedisHash;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @ToString
-@RedisHash("Game")
 public class Game {
 
     private String id;

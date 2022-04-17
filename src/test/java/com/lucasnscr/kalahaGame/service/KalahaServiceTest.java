@@ -63,7 +63,7 @@ public class KalahaServiceTest {
         game.setId(id);
         game.setPlayer1(player1);
         game.setPlayer2(player2);
-        BDDMockito.given(kalahaRepository.findById(BDDMockito.any())).willReturn(Optional.of(game));
+        BDDMockito.given(kalahaRepository.findById(BDDMockito.any())).willReturn(game);
         Game gameMock = kalahaService.findById(id);
         assertEquals(game, gameMock);
     }
@@ -88,7 +88,7 @@ public class KalahaServiceTest {
 
         Optional<Game> gameOp = Optional.of(game);
         game.setGameStatus(GameStatus.PLAYER1_MOVIMENT);
-        BDDMockito.given(kalahaRepository.findById(id)).willReturn(gameOp);
+        BDDMockito.given(kalahaRepository.findById(id)).willReturn(game);
 
         Game fakeGame = kalahaService.play(game.getId(), game.getBoard().getPits().get(1).getPitIndex());
         assertEquals(GameStatus.PLAYER1_MOVIMENT, fakeGame.getGameStatus());

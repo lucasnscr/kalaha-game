@@ -10,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Slf4j
 @Service
 public class KalahaService {
@@ -27,7 +25,7 @@ public class KalahaService {
 
     public Game initGame(Integer initalPitStoneCount){
         Game game = new Game(initalPitStoneCount);
-        return gameRepository.save(game);
+        return gameRepository.save(initalPitStoneCount);
     }
 
     public Game play(String gameId, Integer pitIndex){
@@ -47,9 +45,10 @@ public class KalahaService {
     }
 
     public Game findById(String id){
-        Optional<Game> gameOptional = gameRepository.findById(id);
-        if (gameOptional.isPresent()){
-            return gameOptional.get();
+        Game game = null;
+        game = gameRepository.findById(id);
+        if (game != null){
+            return game;
         }
         return null;
     }
