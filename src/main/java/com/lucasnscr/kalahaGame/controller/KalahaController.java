@@ -36,10 +36,5 @@ public class KalahaController {
         return ResponseEntity.ok().body(kalahaService.play(gameId, pitIndex));
     }
 
-    @GetMapping(value = "/game/{gameId}")
-    public ResponseEntity findById(@PathVariable String gameId){
-        return ResponseEntity.ok().body(kalahaService.findById(gameId));
-    }
-
 
 }

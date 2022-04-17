@@ -13,7 +13,8 @@ public class EndPit extends KalahaRules{
 
     }
 
-    private void nextPlayer(Game game, Pit endPit) {
+    private void empty(Game game, Pit endPit){
+
         if (!endPit.isHouse() && endPit.isPlayerPit(game.getGameStatus()) && endPit.getStoneCount().equals(1) ){
             Pit oppositePit = game.getBoard().getOppositePit(endPit);
             if (oppositePit.getStoneCount() > 0) {
@@ -25,7 +26,8 @@ public class EndPit extends KalahaRules{
         }
     }
 
-    private void empty(Game game, Pit endPit) {
+    private void nextPlayer(Game game, Pit endPit){
+
         if(endPit.isPlayer1House() && game.getGameStatus().equals(GameStatus.PLAYER1_MOVIMENT)){
             game.setGameStatus(GameStatus.PLAYER1_MOVIMENT);
         }
@@ -33,7 +35,7 @@ public class EndPit extends KalahaRules{
             game.setGameStatus(GameStatus.PLAYER2_MOVIMENT);
         }
         else{
-            GameStatus changeStage = game.getGameStatus() == GameStatus.PLAYER1_MOVIMENT ? GameStatus.PLAYER2_MOVIMENT : GameStatus.PLAYER1_MOVIMENT;
+            GameStatus changeStage = game.getGameStatus() == GameStatus.PLAYER1_MOVIMENT? GameStatus.PLAYER2_MOVIMENT : GameStatus.PLAYER1_MOVIMENT;
             game.setGameStatus(changeStage);
         }
     }

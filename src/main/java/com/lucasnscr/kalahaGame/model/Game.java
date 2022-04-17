@@ -27,6 +27,4 @@ public class Game {
         this.board = new Board(initialStoneOnPit, player1, player2);
         this.gameStatus = GameStatus.INIT;
     }
-
-
 }
