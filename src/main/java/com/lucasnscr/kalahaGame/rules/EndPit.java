@@ -4,6 +4,9 @@ import com.lucasnscr.kalahaGame.model.Game;
 import com.lucasnscr.kalahaGame.model.GameStatus;
 import com.lucasnscr.kalahaGame.model.Pit;
 
+/**
+ * State for check last stone and rules
+ */
 public class EndPit extends KalahaRules{
     @Override
     public void apply(Game game, Pit endPit) {

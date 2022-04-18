@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Setter
 @Getter
@@ -24,6 +24,12 @@ public class Board {
 
     private Map<Integer, Pit> pits;
 
+    /**
+     * Constructor to the Board class, initialize for the game
+     * @param initialStoneOnPit
+     * @param player1
+     * @param player2
+     */
     public Board(Integer initialStoneOnPit, Player player1, Player player2){
         this.pits = initPit(initialStoneOnPit, player1, player2);
     }
@@ -32,6 +38,11 @@ public class Board {
         return getPitByPitIndex(pitIndex).getStoneCount();
     }
 
+    /**
+     * Method for getting the players house, if the house is incorrect do generate the Kalaha exception
+     * @param playerIndex
+     * @return pits
+     */
     public Pit getPlayerHouse(Integer playerIndex){
         if(playerIndex.equals(Player.PLAYER1_INDEX)) {
             return pits.get(Board.PLAYER1_HOUSE);
@@ -55,6 +66,11 @@ public class Board {
         return pits.get(pit.getOppositePitIndex());
     }
 
+    /**
+     * Method for count pits to the stone for player 1
+     * @return player1PitStoneCount
+     */
+
     public Integer getPlayer1PitStoneCount(){
         Integer player1PitStoneCount = 0;
         for(int i = Board.PIT_START_INDEX; i < Board.PLAYER1_HOUSE; i++){
@@ -63,6 +79,10 @@ public class Board {
         return player1PitStoneCount;
     }
 
+    /**
+     * Method for count pits to the stone for player 1
+     * @return player1PitStoneCount
+     */
     public Integer getPlayer2PitStoneCount(){
         Integer player2PitStoneCount = 0;
         for(int i=Board.PLAYER1_HOUSE + 1; i < Board.PLAYER2_HOUSE; i++){
@@ -71,9 +91,17 @@ public class Board {
         return player2PitStoneCount;
     }
 
-    private Map<Integer, Pit> initPit(Integer initialStoneOnPit, Player player1, Player player2){
 
-        Map<Integer, Pit> pits = new ConcurrentHashMap<>();
+    /**
+     * Method for define Pits house for player 1 and 2. Initialize board for beginning the game
+     * @param initialStoneOnPit
+     * @param player1
+     * @param player2
+     * @return pits
+     */
+
+    private Map<Integer, Pit> initPit(Integer initialStoneOnPit, Player player1, Player player2){
+        Map<Integer, Pit> pits = new HashMap<>();
         for(int i= Board.PIT_START_INDEX; i < Board.PLAYER1_HOUSE; i++){
             Pit pit = new Pit(i, initialStoneOnPit, player1.getPlayerIndex());
             pits.put(i, pit);

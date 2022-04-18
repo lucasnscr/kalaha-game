@@ -45,7 +45,7 @@ public class KalahaServiceTest {
         game.setBoard(board);
 
         BDDMockito.given(kalahaRepository.save(BDDMockito.any())).willReturn(game);
-        Game gameMock = kalahaService.initGame(6);
+        Game gameMock = kalahaService.createGame(6);
         assertEquals(game, gameMock);
     }
 

@@ -6,11 +6,15 @@ import com.lucasnscr.kalahaGame.model.GameStatus;
 import com.lucasnscr.kalahaGame.model.Pit;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * State responsible to verify game and apply rules.
+ */
+
 @Slf4j
 public class GameOver extends KalahaRules{
     @Override
     public void apply(Game game, Pit currentPit) {
-        log.debug("checking game end rule");
+        log.debug("analysis game end rule");
 
         Integer player1StoneCount = game.getBoard().getPlayer1PitStoneCount();
         Integer player2StoneCount = game.getBoard().getPlayer2PitStoneCount();

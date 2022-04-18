@@ -11,29 +11,30 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/kalaha")
 public class KalahaController {
-    private final KalahaService kalahaService;
 
+    private final KalahaService kalahaService;
     public KalahaController(KalahaService kalahaService){
         this.kalahaService = kalahaService;
     }
 
     @PostMapping(value = "/games")
-    public ResponseEntity initBoard(@RequestParam(name = "stone", defaultValue = "6", required = false) Integer numberOfStone){
-        return ResponseEntity.status(HttpStatus.CREATED).body(kalahaService.initGame(numberOfStone));
+    public ResponseEntity createGame(@RequestParam(name = "stone", defaultValue = "6", required = false) Integer numberOfStone){
+        return ResponseEntity.status(HttpStatus.CREATED).body(kalahaService.createGame(numberOfStone));
     }
-
 
     @PutMapping("/games/{gameId}/pits/{pitIndex}")
     public ResponseEntity play(@PathVariable String gameId, @PathVariable Integer pitIndex){
-        if(pitIndex > Board.PIT_END_INDEX || pitIndex < Board.PIT_START_INDEX){
-            throw new KalahaException("Incorrect pit index");
-        }
-
-        if(pitIndex.equals(Board.PLAYER1_HOUSE) || pitIndex.equals(Board.PLAYER2_HOUSE)){
-            throw new IllegalMoveException("House stone is not allow to distribute");
-        }
-
+        validate(pitIndex);
         return ResponseEntity.ok().body(kalahaService.play(gameId, pitIndex));
+    }
+
+    private void validate(Integer pitIndex){
+        if(pitIndex > Board.PIT_END_INDEX || pitIndex < Board.PIT_START_INDEX){
+            throw new KalahaException("incorrect index");
+        }
+        if(pitIndex.equals(Board.PLAYER1_HOUSE) || pitIndex.equals(Board.PLAYER2_HOUSE)){
+            throw new IllegalMoveException("You dont distribute in the house players");
+        }
     }
 
 

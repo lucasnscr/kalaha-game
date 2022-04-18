@@ -10,12 +10,21 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Repository in memory for management data game
+ */
+
 @Slf4j
 @Component
 public class KalahaRepository {
 
     private static final Map<String, Game> gameMap = new ConcurrentHashMap<>();
 
+    /**
+     * Save the game
+     * @param initialPitStoneCount
+     * @return
+     */
     public Game save(Integer initialPitStoneCount){
         String id = UUID.randomUUID().toString();
         Game game = new Game(initialPitStoneCount);
@@ -23,6 +32,12 @@ public class KalahaRepository {
         gameMap.put(id, game);
         return gameMap.get(id);
     }
+
+    /**
+     * find game by id
+     * @param id
+     * @return
+     */
 
     public Game findById(String id){
         Game game = gameMap.get(id);

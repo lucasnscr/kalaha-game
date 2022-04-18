@@ -20,11 +20,21 @@ public class Pit {
     @NotNull
     private Integer playerIndex;
 
+    /**
+     * Method for check status game and pit index to the board
+     * @param gameStatus
+     * @return boolean
+     */
     public Boolean isDistributable(GameStatus gameStatus){
         return (!gameStatus.equals(GameStatus.PLAYER1_MOVIMENT) || !this.pitIndex.equals(Board.PLAYER2_HOUSE))
                 && (!gameStatus.equals(GameStatus.PLAYER2_MOVIMENT) || !this.pitIndex.equals(Board.PLAYER1_HOUSE));
     }
 
+    /**
+     * define permission to the turn pits in the game
+     * @param gameStatus
+     * @return
+     */
     public Boolean isPlayerPit(GameStatus gameStatus){
         if(gameStatus.equals(GameStatus.PLAYER1_MOVIMENT) && this.playerIndex.equals(Player.PLAYER1_INDEX)) {
             return true;
