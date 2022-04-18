@@ -15,7 +15,7 @@ The game is over as soon as one of the sides runs out of stones. The player who 
 
 ### Installation and Technologies
 
-- Docker 
+- Docker
 - Docker-compose
 - Java 17
 - Maven
@@ -25,7 +25,7 @@ The game is over as soon as one of the sides runs out of stones. The player who 
 - JUNIT 5
 - Docker Maven Plugin by Fabric8 for generate containers with ARM64 Architecture
 
-### About Running Project 
+### About Running Project
 For running this project you need two forms, Maven or Docker-Compose. For using maven you need run this command
 ```
 mvn spring-boot:run
@@ -49,10 +49,18 @@ mvn test
 
 ### About the Solution
 
+For the best construction of the game, it was necessary to use a **behavioral pattern**, a **state machine**.
+
+The State pattern suggests that you create new classes for all possible states of an object and extract all state-specific behaviors into these classes.
+
+Instead of implementing all behaviors on its own, the original object, called context, stores a reference to one of the state objects that represents its current state, and delegates all the state-related work to that object.
+
+**Example State Machine to this project**
+
+![State illustration](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6002efcx4diqjwba2l2b.png)
 
 
 ## Author
 
 * [Lucas Nascimento](https://github.com/lucasnscr)
-
 
