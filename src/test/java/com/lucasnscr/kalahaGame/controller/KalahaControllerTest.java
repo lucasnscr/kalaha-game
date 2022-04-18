@@ -1,5 +1,6 @@
 package com.lucasnscr.kalahaGame.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucasnscr.kalahaGame.model.Game;
@@ -72,7 +73,6 @@ public class KalahaControllerTest {
     }
 
     @Test
-    @DirtiesContext
     public void playGame() throws Exception {
 
         final MockHttpServletRequestBuilder createGameRequest = MockMvcRequestBuilders.post("/api/kalaha/games");
@@ -103,5 +103,17 @@ public class KalahaControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.gameStatus").value("PLAYER1_MOVIMENT"))
 
                 .andReturn();
+    }
+
+    @Test
+    public void findById() throws Exception {
+        final MockHttpServletRequestBuilder createGameRequest = MockMvcRequestBuilders.post("/api/kalaha/games");
+        String responseString = mockMvc.perform(createGameRequest).andReturn().getResponse().getContentAsString();
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        Game game = objectMapper.readValue(responseString, Game.class);
+
+        MockHttpServletRequestBuilder findGame = MockMvcRequestBuilders.get("/api/kalaha/games/"+game.getId());
+        mockMvc.perform(findGame)
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

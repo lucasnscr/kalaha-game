@@ -28,6 +28,11 @@ public class KalahaController {
         return ResponseEntity.ok().body(kalahaService.play(gameId, pitIndex));
     }
 
+    @GetMapping("/games/{gameId}")
+    public ResponseEntity findById(@PathVariable String gameId){
+        return ResponseEntity.ok().body(kalahaService.findById(gameId));
+    }
+
     private void validate(Integer pitIndex){
         if(pitIndex > Board.PIT_END_INDEX || pitIndex < Board.PIT_START_INDEX){
             throw new KalahaException("incorrect index");
